@@ -17,10 +17,12 @@ export function useNotifications(limit = 20) {
   });
 
   // Live updates: RLS limits the stream to the signed-in user's rows.
+  // Several components use this hook at once; realtime-js reuses a channel by topic and throws if
+  // callbacks are added after subscribe(), so every subscription gets its own topic.
   useEffect(() => {
     if (!user) return;
     const channel = supabase
-      .channel(`notifications:${user.id}`)
+      .channel(`notifications:${user.id}:${crypto.randomUUID()}`)
       .on('postgres_changes', { event: 'INSERT', schema: 'public', table: 'notifications', filter: `user_id=eq.${user.id}` }, () => {
         qc.invalidateQueries({ queryKey: ['notifications', user.id] });
         qc.invalidateQueries({ queryKey: ['dashboard-counts'] });

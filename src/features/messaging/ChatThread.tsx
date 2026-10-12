@@ -24,9 +24,9 @@ export function useMessages(conversationId: string | undefined) {
   });
   useEffect(() => {
     if (!conversationId) return;
-    // Realtime respects RLS: only participants receive these events.
+    // Realtime respects RLS: only participants receive these events. Unique topic: see useNotifications.
     const channel = supabase
-      .channel(`messages:${conversationId}`)
+      .channel(`messages:${conversationId}:${crypto.randomUUID()}`)
       .on('postgres_changes', { event: 'INSERT', schema: 'public', table: 'messages', filter: `conversation_id=eq.${conversationId}` }, (payload) => {
         qc.setQueryData<Message[]>(['messages', conversationId], (old) =>
           old && !old.some((m) => m.id === (payload.new as Message).id) ? [...old, payload.new as Message] : old);
