@@ -1,0 +1,98 @@
+@import 'tailwindcss';
+
+/* Hire Me! design tokens.
+   Monochrome UI (ink + white). Brand orange is reserved for the logo's "!" mark.
+   Semantic colors appear only in status indicators. */
+@theme {
+  --font-sans: 'Inter', ui-sans-serif, system-ui, -apple-system, 'Segoe UI', sans-serif;
+  --font-display: 'Sora', 'Inter', ui-sans-serif, system-ui, sans-serif;
+
+  --color-ink-950: #0e1218;
+  --color-ink-900: #151a22;
+  --color-ink-850: #1b2431; /* brand navy */
+  --color-ink-800: #232c39;
+  --color-ink-700: #2f3946;
+  --color-ink-600: #485261;
+  --color-ink-500: #697383;
+  --color-ink-400: #939ba7;
+  --color-ink-300: #bec4cc;
+  --color-ink-200: #dde0e5;
+  --color-ink-100: #eceef1;
+  --color-ink-50: #f5f6f7;
+  --color-paper: #f4f4f2;
+  --color-brand: #f2643c;
+
+  --color-success-600: #17804a;
+  --color-success-50: #e8f6ee;
+  --color-warning-600: #9a6700;
+  --color-warning-50: #fdf4dc;
+  --color-danger-600: #c2333a;
+  --color-danger-50: #fdecec;
+  --color-info-600: #2f5fc4;
+  --color-info-50: #eaf0fd;
+
+  --radius-sm: 6px;
+  --radius-md: 10px;
+  --radius-lg: 14px;
+  --radius-xl: 18px;
+  --radius-2xl: 26px;
+
+  --shadow-card: 0 1px 2px rgb(14 18 24 / 0.06), 0 1px 1px rgb(14 18 24 / 0.04);
+  --shadow-pop: 0 12px 32px -8px rgb(14 18 24 / 0.28);
+
+  --text-2xs: 0.6875rem;
+  --text-2xs--line-height: 1rem;
+}
+
+@layer base {
+  html {
+    -webkit-text-size-adjust: 100%;
+    text-rendering: optimizeLegibility;
+  }
+  body {
+    @apply bg-paper font-sans text-[15px] text-ink-900 antialiased;
+  }
+  h1, h2, h3, h4 {
+    @apply font-display tracking-[-0.02em] text-balance;
+  }
+  :focus-visible {
+    @apply outline-2 outline-offset-2 outline-ink-900;
+  }
+  .dark-surface :focus-visible {
+    @apply outline-white;
+  }
+  ::selection {
+    @apply bg-ink-900 text-white;
+  }
+  @media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after {
+      animation-duration: 0.01ms !important;
+      transition-duration: 0.01ms !important;
+    }
+  }
+}
+
+@layer components {
+  .card {
+    @apply rounded-xl border border-ink-200/70 bg-white shadow-card;
+  }
+  .label {
+    @apply mb-1.5 block text-[13px] font-medium text-ink-700;
+  }
+  .input {
+    @apply block w-full rounded-md border border-ink-200 bg-white px-3 py-2 text-[15px] text-ink-900 shadow-[inset_0_1px_1px_rgb(14_18_24/0.03)] transition-colors placeholder:text-ink-400 hover:border-ink-300 focus:border-ink-900 focus:outline-none focus:ring-2 focus:ring-ink-900/10 disabled:cursor-not-allowed disabled:bg-ink-50 disabled:text-ink-500 aria-[invalid=true]:border-danger-600 aria-[invalid=true]:focus:ring-danger-600/15;
+  }
+  .prose-plain p + p {
+    @apply mt-3;
+  }
+}
+
+/* Printing a document page (Print / Save as PDF) shows only the .print-area element. */
+@media print {
+  @page { margin: 16mm; }
+  body { background: white !important; }
+  body * { visibility: hidden; }
+  .print-area, .print-area * { visibility: visible; }
+  .print-area { position: absolute; inset: 0 auto auto 0; width: 100%; box-shadow: none !important; border: 0 !important; }
+  .no-print { display: none !important; }
+}
