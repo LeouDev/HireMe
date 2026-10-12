@@ -82,9 +82,9 @@ export function Money({ cents, className = '', showCents }: { cents: number | nu
 }
 
 export function Rating({ value, count, className = '' }: { value: number | null | undefined; count: number; className?: string }) {
-  if (!count) return <span className={`text-[13px] text-ink-500 ${className}`}>No reviews yet</span>;
+  if (!count) return <span className={`on-glass text-[13px] text-ink-500 ${className}`}>No reviews yet</span>;
   return (
-    <span className={`inline-flex items-center gap-1 text-[13px] ${className}`} aria-label={`Rated ${Number(value).toFixed(1)} out of 5 from ${count} reviews`}>
+    <span className={`on-glass inline-flex items-center gap-1 text-[13px] ${className}`} aria-label={`Rated ${Number(value).toFixed(1)} out of 5 from ${count} reviews`}>
       <Star className="size-3.5 fill-current" aria-hidden="true" />
       <span className="font-medium">{Number(value).toFixed(1)}</span>
       <span className="text-ink-500">({count})</span>
@@ -105,7 +105,7 @@ export function Stars({ value }: { value: number }) {
 export function VerifiedMark({ kinds, status }: { kinds?: string[] | null; status: string }) {
   if (status !== 'verified') return null;
   return (
-    <span className="inline-flex items-center gap-1 text-[13px] font-medium text-ink-900" title={`Verified: ${(kinds ?? []).join(', ')}`}>
+    <span className="on-glass inline-flex items-center gap-1 text-[13px] font-medium text-ink-900" title={`Verified: ${(kinds ?? []).join(', ')}`}>
       <BadgeCheck className="size-4" aria-hidden="true" /> ID verified
     </span>
   );
@@ -115,15 +115,15 @@ export function Pagination({ page, pageSize, total, onChange }: { page: number; 
   const pages = Math.max(1, Math.ceil(total / pageSize));
   if (pages <= 1) return null;
   return (
-    <nav className="flex items-center justify-between gap-4 pt-4 text-sm" aria-label="Pagination">
+    <nav className="on-glass flex items-center justify-between gap-4 pt-4 text-sm" aria-label="Pagination">
       <p className="text-ink-500">
         Page {page} of {pages}
       </p>
       <div className="flex gap-2">
-        <button type="button" disabled={page <= 1} onClick={() => onChange(page - 1)} className="inline-flex h-9 items-center gap-1 rounded-md border border-ink-200 bg-white px-3 disabled:opacity-40">
+        <button type="button" disabled={page <= 1} onClick={() => onChange(page - 1)} className="inline-flex h-9 items-center gap-1 rounded-full bg-white px-3.5 disabled:opacity-40">
           <ChevronLeft className="size-4" aria-hidden="true" /> Previous
         </button>
-        <button type="button" disabled={page >= pages} onClick={() => onChange(page + 1)} className="inline-flex h-9 items-center gap-1 rounded-md border border-ink-200 bg-white px-3 disabled:opacity-40">
+        <button type="button" disabled={page >= pages} onClick={() => onChange(page + 1)} className="inline-flex h-9 items-center gap-1 rounded-full bg-white px-3.5 disabled:opacity-40">
           Next <ChevronRight className="size-4" aria-hidden="true" />
         </button>
       </div>

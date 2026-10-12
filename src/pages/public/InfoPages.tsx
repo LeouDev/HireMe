@@ -6,9 +6,9 @@ import { Seo } from '@/components/Seo';
 function Doc({ title, updated, children }: { title: string; updated?: string; children: ReactNode }) {
   return (
     <div className="mx-auto max-w-3xl px-4 py-12 sm:px-6">
-      <h1 className="text-3xl font-semibold text-ink-950">{title}</h1>
-      {updated && <p className="mt-2 text-sm text-ink-500">Last updated {updated}</p>}
-      <div className="mt-8 space-y-8 text-[15px] leading-relaxed text-ink-700 [&_h2]:mb-2 [&_h2]:text-lg [&_h2]:font-semibold [&_h2]:text-ink-950 [&_li]:ml-5 [&_li]:list-disc [&_ul]:space-y-1.5">
+      <h1 className="text-3xl font-semibold text-white">{title}</h1>
+      {updated && <p className="mt-2 text-sm text-ink-400">Last updated {updated}</p>}
+      <div className="card mt-8 space-y-8 rounded-2xl p-6 text-[15px] leading-relaxed text-ink-700 sm:p-8 [&_h2]:mb-2 [&_h2]:text-lg [&_h2]:font-semibold [&_h2]:text-ink-950 [&_li]:ml-5 [&_li]:list-disc [&_ul]:space-y-1.5">
         {children}
       </div>
     </div>
@@ -30,7 +30,7 @@ export function HelpPage() {
   return (
     <Doc title="Help center">
       <Seo title="Help center" path="/help" description="Answers about requests, quotations, contracts, bookings, payments and verification on Hire Me!." />
-      <div className="divide-y divide-ink-200 rounded-xl border border-ink-200/70 bg-white">
+      <div className="divide-y divide-ink-200 rounded-xl border border-ink-200/70">
         {faqs.map(([q, a]) => (
           <details key={q} className="p-5">
             <summary className="cursor-pointer font-medium text-ink-950">{q}</summary>

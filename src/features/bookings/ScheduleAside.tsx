@@ -37,7 +37,7 @@ export function ScheduleAside({ scope }: { scope: 'customer' | 'professional' })
 
   return (
     <div className="space-y-4">
-      <div className="rounded-xl border border-white/5 bg-white/[0.03] p-4">
+      <div className="rounded-2xl border border-white/10 bg-white/[0.06] p-4">
         <div className="flex items-center gap-3">
           <Avatar name={scope === 'professional' ? pro?.display_name : profile?.full_name} path={scope === 'professional' ? pro?.avatar_path : profile?.avatar_path} />
           <div className="min-w-0 flex-1">
@@ -57,7 +57,7 @@ export function ScheduleAside({ scope }: { scope: 'customer' | 'professional' })
         )}
       </div>
 
-      <div className="rounded-xl border border-white/5 bg-white/[0.03] p-4">
+      <div className="rounded-2xl border border-white/10 bg-white/[0.06] p-4">
         <div className="mb-3 flex items-center justify-between">
           <p className="text-sm font-medium text-white">{monthLabel}</p>
           <div className="flex gap-1">
@@ -73,7 +73,7 @@ export function ScheduleAside({ scope }: { scope: 'customer' | 'professional' })
             const isToday = iso === today;
             const busy = busyDays.has(iso);
             return (
-              <span key={iso} className={`relative mx-auto grid size-8 place-items-center rounded-full text-xs ${isToday ? 'bg-white font-semibold text-ink-950' : busy ? 'bg-white/10 text-white' : 'text-ink-300'}`}>
+              <span key={iso} className={`relative mx-auto grid size-8 place-items-center rounded-full text-xs ${isToday ? 'bg-[#fff] text-[#0e1218] font-semibold' : busy ? 'bg-white/10 text-white' : 'text-ink-300'}`}>
                 {day}
                 {busy && !isToday && <span className="absolute bottom-1 size-1 rounded-full bg-white" aria-hidden="true" />}
                 {busy && <span className="sr-only">(booked)</span>}
@@ -90,13 +90,13 @@ export function ScheduleAside({ scope }: { scope: 'customer' | 'professional' })
         </div>
         <ul className="space-y-2">
           {upcoming.isPending && [0, 1].map((i) => <li key={i}><Skeleton className="h-16 bg-white/5" /></li>)}
-          {upcoming.data?.length === 0 && <li className="rounded-xl bg-white/[0.03] px-4 py-6 text-center text-xs text-ink-400">No upcoming bookings.</li>}
+          {upcoming.data?.length === 0 && <li className="rounded-2xl bg-white/[0.06] px-4 py-6 text-center text-xs text-ink-400">No upcoming bookings.</li>}
           {upcoming.data?.map((b) => {
             const date = new Date(b.scheduled_start);
             return (
               <li key={b.id}>
-                <Link to={`${base}/bookings/${b.id}`} className="flex items-center gap-3 rounded-xl border border-white/5 bg-white/[0.03] p-3 hover:bg-white/[0.06]">
-                  <span className="grid w-11 shrink-0 rounded-lg bg-white py-1 text-center text-ink-950">
+                <Link to={`${base}/bookings/${b.id}`} className="flex items-center gap-3 rounded-2xl border border-white/10 bg-white/[0.06] p-3 hover:bg-white/[0.1]">
+                  <span className="grid w-11 shrink-0 rounded-lg bg-[#fff] text-[#0e1218] py-1 text-center">
                     <span className="text-[10px] font-medium uppercase">{date.toLocaleString('en-PH', { month: 'short', timeZone: 'Asia/Manila' })}</span>
                     <span className="font-display text-base leading-tight font-semibold">{date.toLocaleString('en-PH', { day: 'numeric', timeZone: 'Asia/Manila' })}</span>
                   </span>

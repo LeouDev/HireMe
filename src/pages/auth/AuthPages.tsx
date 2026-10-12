@@ -19,12 +19,12 @@ function AuthCard({ title, subtitle, children, footer }: { title: string; subtit
     <div className="flex min-h-[calc(100dvh-4rem)] items-center justify-center px-4 py-12">
       <div className="w-full max-w-md">
         <div className="mb-6 text-center">
-          <Logo className="text-2xl" />
-          <h1 className="mt-6 text-2xl font-semibold text-ink-950">{title}</h1>
-          {subtitle && <p className="mt-2 text-sm text-ink-600">{subtitle}</p>}
+          <Logo inverse className="text-2xl" />
+          <h1 className="mt-6 text-2xl font-semibold text-white">{title}</h1>
+          {subtitle && <p className="mt-2 text-sm text-ink-300">{subtitle}</p>}
         </div>
-        <div className="card p-6">{children}</div>
-        {footer && <p className="mt-6 text-center text-sm text-ink-600">{footer}</p>}
+        <div className="card rounded-2xl p-6">{children}</div>
+        {footer && <p className="mt-6 text-center text-sm text-ink-300 [&_a]:text-white">{footer}</p>}
       </div>
     </div>
   );

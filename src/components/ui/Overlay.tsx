@@ -29,7 +29,7 @@ export function Dialog({ open, onClose, title, description, children, footer, si
       ref={ref}
       onClose={onClose}
       onClick={(e) => e.target === ref.current && onClose()}
-      className={`m-auto w-[calc(100%-2rem)] ${width} rounded-xl bg-white p-0 text-ink-900 shadow-pop backdrop:bg-ink-950/50 backdrop:backdrop-blur-[2px]`}
+      className={`m-auto w-[calc(100%-2rem)] ${width} rounded-[22px] bg-white p-0 text-ink-900 shadow-pop backdrop:bg-black/50 backdrop:backdrop-blur-md`}
     >
       {open && (
         <div className="flex max-h-[85vh] flex-col">
@@ -130,7 +130,7 @@ export function ToastProvider({ children }: { children: ReactNode }) {
       {children}
       <div aria-live="polite" className="pointer-events-none fixed inset-x-0 bottom-20 z-50 flex flex-col items-center gap-2 px-4 md:bottom-6">
         {toasts.map((t) => (
-          <div key={t.id} className="pointer-events-auto flex max-w-md items-center gap-2 rounded-lg bg-ink-950 px-4 py-3 text-sm text-white shadow-pop">
+          <div key={t.id} className="glass-strong pointer-events-auto flex max-w-md items-center gap-2 rounded-2xl px-4 py-3 text-sm text-white shadow-pop">
             {t.kind === 'success' ? <CheckCircle2 className="size-4 shrink-0" aria-hidden="true" /> : <XCircle className="size-4 shrink-0 text-danger-50" aria-hidden="true" />}
             {t.message}
           </div>

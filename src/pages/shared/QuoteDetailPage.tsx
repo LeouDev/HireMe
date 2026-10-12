@@ -5,10 +5,7 @@ import { useEffect, useRef, useState } from 'react';
 import { useFieldArray, useForm } from 'react-hook-form';
 import { Link, useNavigate, useParams } from 'react-router';
 import { z } from 'zod';
-import {
-  Alert, Button, Card, CardHeader, ConfirmDialog, ErrorState, Field, FormError, Input, Money, MoneyInput,
-  PageHeader, PageSpinner, Select, StatusBadge, Textarea, useToast,
-} from '@/components/ui';
+import { Alert, Button, Card, CardHeader, ConfirmDialog, DateInput, ErrorState, Field, FormError, Input, Money, MoneyInput, PageHeader, PageSpinner, Select, StatusBadge, Textarea, useToast } from '@/components/ui';
 import { QuoteDocument } from '@/features/workflow/QuoteDocument';
 import { Timeline } from '@/features/workflow/Timeline';
 import { errorMessage } from '@/lib/errors';
@@ -353,7 +350,7 @@ function QuoteBuilder({ data }: { data: NonNullable<ReturnType<typeof useQuote>[
                   <label className="flex flex-1 items-center gap-2"><Input type="number" min={0} max={59} {...register('duration_minutes')} aria-label="Minutes" /><span className="text-sm text-ink-500">min</span></label>
                 </div>
               </div>
-              <Field label="Valid until" error={errors.valid_until}>{(p) => <Input {...p} type="date" min={todayManila()} {...register('valid_until')} />}</Field>
+              <Field label="Valid until" error={errors.valid_until}>{(p) => <DateInput {...p} min={todayManila()} {...register('valid_until')} />}</Field>
               <Field label="Deposit paid online (%)" error={errors.deposit_percent} hint="0 = no online deposit.">{(p) => <Input {...p} type="number" min={0} max={100} {...register('deposit_percent')} />}</Field>
               <Field label="Payment terms" className="sm:col-span-2">{(p) => <Textarea {...p} rows={3} {...register('payment_terms')} placeholder="e.g. Balance payable in cash upon completion." />}</Field>
               <Field label="Exclusions">{(p) => <Textarea {...p} rows={3} {...register('exclusions')} />}</Field>

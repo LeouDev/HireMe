@@ -4,7 +4,7 @@ import { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { Link, useNavigate, useParams, useSearchParams } from 'react-router';
 import { z } from 'zod';
-import { Alert, Avatar, Button, ButtonLink, EmptyState, ErrorState, Field, FormError, Input, PageSpinner, Select, Textarea } from '@/components/ui';
+import { Alert, Avatar, Button, ButtonLink, DateInput, EmptyState, ErrorState, Field, FormError, Input, PageSpinner, Select, Textarea } from '@/components/ui';
 import { Seo } from '@/components/Seo';
 import { useAuth } from '@/features/auth/AuthProvider';
 import { priceLabel } from '@/features/catalog/pricing';
@@ -105,8 +105,8 @@ export function RequestQuotePage() {
       <Link to={`/pro/${pro.slug}`} className="flex items-center gap-3">
         <Avatar name={pro.display_name} path={pro.avatar_path} />
         <span>
-          <span className="block text-sm text-ink-500">Request a quote from</span>
-          <span className="block font-display font-semibold text-ink-950">{pro.display_name}</span>
+          <span className="block text-sm text-ink-400">Request a quote from</span>
+          <span className="block font-display font-semibold text-white">{pro.display_name}</span>
         </span>
       </Link>
 
@@ -132,7 +132,7 @@ export function RequestQuotePage() {
           </Field>
         </div>
         <div className="grid gap-5 sm:grid-cols-2">
-          <Field label="Preferred date" error={errors.preferredDate}>{(p) => <Input {...p} type="date" min={todayManila()} {...register('preferredDate')} />}</Field>
+          <Field label="Preferred date" error={errors.preferredDate}>{(p) => <DateInput {...p} min={todayManila()} {...register('preferredDate')} />}</Field>
           <Field label="Preferred time">
             {(p) => (
               <Select {...p} {...register('preferredTime')}>
@@ -144,8 +144,8 @@ export function RequestQuotePage() {
               </Select>
             )}
           </Field>
-          <Field label="Alternative date (optional)">{(p) => <Input {...p} type="date" min={todayManila()} {...register('altDate1')} />}</Field>
-          <Field label="Another alternative (optional)">{(p) => <Input {...p} type="date" min={todayManila()} {...register('altDate2')} />}</Field>
+          <Field label="Alternative date (optional)">{(p) => <DateInput {...p} min={todayManila()} {...register('altDate1')} />}</Field>
+          <Field label="Another alternative (optional)">{(p) => <DateInput {...p} min={todayManila()} {...register('altDate2')} />}</Field>
         </div>
         <Field label="Additional requirements" error={errors.requirements}>
           {(p) => <Textarea {...p} {...register('requirements')} rows={3} maxLength={2000} placeholder="Parking, building permits, materials you already have…" />}

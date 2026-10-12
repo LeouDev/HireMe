@@ -46,9 +46,9 @@ export function BecomeProPage() {
         description="Create your free professional page, list your services and prices, and manage inquiries, quotations, contracts and bookings in one place." />
       <div className="grid gap-10 lg:grid-cols-[1.1fr_0.9fr]">
         <div>
-          <p className="text-[13px] font-medium tracking-wide text-ink-500 uppercase">For skilled professionals</p>
-          <h1 className="mt-2 text-4xl font-semibold text-ink-950">Your skills deserve more than a Facebook post.</h1>
-          <p className="mt-4 text-lg text-ink-600">Build your professional page, get customers, send quotations and manage your business online.</p>
+          <p className="text-[13px] font-medium tracking-wide text-ink-400 uppercase">For skilled professionals</p>
+          <h1 className="mt-2 text-4xl font-semibold text-white">Your skills deserve more than a Facebook post.</h1>
+          <p className="mt-4 text-lg text-ink-300">Build your professional page, get customers, send quotations and manage your business online.</p>
           <ul className="mt-8 grid gap-4 sm:grid-cols-2">
             {[
               { icon: Link2, t: 'Shareable page', b: `${env.appUrl.replace(/^https?:\/\//, '')}/pro/your-name` },
@@ -56,7 +56,7 @@ export function BecomeProPage() {
               { icon: FileSignature, t: 'Quotes & contracts', b: 'Itemized quotations and e-signing.' },
               { icon: CalendarDays, t: 'Bookings', b: 'Availability, schedule and job status.' },
             ].map((x) => (
-              <li key={x.t} className="rounded-xl border border-ink-200/70 bg-white p-4">
+              <li key={x.t} className="rounded-2xl bg-white p-4 shadow-card">
                 <x.icon className="size-5" aria-hidden="true" />
                 <p className="mt-2 font-medium text-ink-950">{x.t}</p>
                 <p className="text-sm break-all text-ink-600">{x.b}</p>
@@ -65,7 +65,7 @@ export function BecomeProPage() {
           </ul>
         </div>
 
-        <div className="card self-start p-6">
+        <div className="card self-start rounded-2xl p-6">
           {pro ? (
             <div>
               <h2 className="text-xl font-semibold">You already have a professional page</h2>
@@ -99,12 +99,12 @@ export function BecomeProPage() {
         </div>
       </div>
 
-      <section id="plans" className="mt-20 scroll-mt-24">
-        <h2 className="text-2xl font-semibold text-ink-950">Plans</h2>
-        <p className="mt-2 text-ink-600">Start on Free. Paid plans are planned; prices below are illustrative and not yet available for purchase.</p>
+      <section id="plans" className="mt-20 scroll-mt-24 pt-1">
+        <h2 className="text-2xl font-semibold text-white">Plans</h2>
+        <p className="mt-2 text-ink-300">Start on Free. Paid plans are planned; prices below are illustrative and not yet available for purchase.</p>
         <div className="mt-6 grid gap-4 md:grid-cols-3">
           {plans.data?.map((p) => (
-            <div key={p.code} className={`rounded-xl border p-6 ${p.code === 'professional' ? 'border-ink-950 bg-ink-950 text-white' : 'border-ink-200/70 bg-white'}`}>
+            <div key={p.code} className={`rounded-[24px] p-6 ${p.code === 'professional' ? 'glass text-white' : 'bg-white text-ink-950 shadow-card'}`}>
               <h3 className="font-display text-lg font-semibold">{p.name}</h3>
               <p className={`mt-1 text-sm ${p.code === 'professional' ? 'text-ink-300' : 'text-ink-600'}`}>{p.description}</p>
               <p className="mt-4 font-display text-3xl font-semibold">{p.price_cents ? formatPHP(p.price_cents) : 'Free'}{p.price_cents > 0 && <span className="text-sm font-normal opacity-70">/{p.billing_interval}</span>}</p>

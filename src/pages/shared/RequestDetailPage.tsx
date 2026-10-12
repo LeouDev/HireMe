@@ -5,10 +5,7 @@ import { useEffect, useRef, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { Link, useNavigate, useParams, useSearchParams } from 'react-router';
 import { z } from 'zod';
-import {
-  Alert, Avatar, Button, Card, CardHeader, ConfirmDialog, DetailList, Dialog, EmptyState, ErrorState, Field, FormError, Input,
-  Money, PageHeader, PageSpinner, StatusBadge, Textarea, useToast,
-} from '@/components/ui';
+import { Alert, Avatar, Button, Card, CardHeader, ConfirmDialog, DateInput, DetailList, Dialog, EmptyState, ErrorState, Field, FormError, Input, Money, PageHeader, PageSpinner, StatusBadge, Textarea, useToast } from '@/components/ui';
 import { useAuth } from '@/features/auth/AuthProvider';
 import { ChatThread } from '@/features/messaging/ChatThread';
 import { REQUEST_SELECT } from '@/features/workflow/selects';
@@ -270,7 +267,7 @@ function EditRequestDialog({ request, onClose, onSaved }: {
           <Field label="City" error={errors.location_city}>{(p) => <Input {...p} {...register('location_city')} />}</Field>
           <Field label="Address" error={errors.location_address}>{(p) => <Input {...p} {...register('location_address')} />}</Field>
         </div>
-        <Field label="Preferred date" error={errors.preferred_date}>{(p) => <Input {...p} type="date" min={todayManila()} {...register('preferred_date')} />}</Field>
+        <Field label="Preferred date" error={errors.preferred_date}>{(p) => <DateInput {...p} min={todayManila()} {...register('preferred_date')} />}</Field>
         <Field label="Additional requirements" error={errors.requirements}>{(p) => <Textarea {...p} rows={3} {...register('requirements')} />}</Field>
         <FormError message={error} />
       </form>

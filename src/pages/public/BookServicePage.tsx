@@ -68,8 +68,8 @@ export function BookServicePage() {
       <Link to={`/pro/${pro.slug}`} className="flex items-center gap-3">
         <Avatar name={pro.display_name} path={pro.avatar_path} />
         <span>
-          <span className="block text-sm text-ink-500">Book with {pro.display_name}</span>
-          <span className="block font-display font-semibold text-ink-950">{service.name} · {priceLabel(service)} · {formatDuration(service.duration_minutes)}</span>
+          <span className="block text-sm text-ink-400">Book with {pro.display_name}</span>
+          <span className="block font-display font-semibold text-white">{service.name} · {priceLabel(service)} · {formatDuration(service.duration_minutes)}</span>
         </span>
       </Link>
 

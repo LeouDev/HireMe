@@ -4,10 +4,7 @@ import { CalendarOff, Copy, Plus, X } from 'lucide-react';
 import { useState } from 'react';
 import { useForm, useWatch } from 'react-hook-form';
 import { z } from 'zod';
-import {
-  Button, Card, CardHeader, Checkbox, ConfirmDialog, EmptyState, ErrorState, Field, FormError, Input, PageHeader, PageSpinner,
-  Skeleton, useToast,
-} from '@/components/ui';
+import { Button, Card, CardHeader, Checkbox, ConfirmDialog, DateInput, EmptyState, ErrorState, Field, FormError, Input, PageHeader, PageSpinner, Skeleton, useToast } from '@/components/ui';
 import { useAuth } from '@/features/auth/AuthProvider';
 import { errorMessage } from '@/lib/errors';
 import { formatTime, formatWeekday, TIME_ZONE, todayManila } from '@/lib/format';
@@ -397,7 +394,7 @@ function TimeOffCard({ proId }: { proId: string }) {
       <form onSubmit={handleSubmit((v) => add.mutate(v))} noValidate className="space-y-4 border-t border-ink-100 p-5">
         <div className="grid gap-4 sm:grid-cols-2">
           <Field label="Date" required error={errors.on_date}>
-            {(p) => <Input {...p} type="date" min={today} {...register('on_date')} />}
+            {(p) => <DateInput {...p} min={today} {...register('on_date')} />}
           </Field>
           <Field label="Reason" error={errors.reason} hint="Optional. Only you can see this.">
             {(p) => <Input {...p} maxLength={200} {...register('reason')} />}

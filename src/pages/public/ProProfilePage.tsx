@@ -99,16 +99,16 @@ export function ProProfilePage() {
 
       {/* Header */}
       <header className="px-3 pt-3 sm:px-4 sm:pt-4">
-        <div className="relative mx-auto h-40 max-w-[1400px] overflow-hidden rounded-2xl bg-ink-950 sm:h-56">
+        <div className="glass relative mx-auto h-40 max-w-[1400px] overflow-hidden rounded-[32px] sm:h-56">
           {cover && <img src={cover} alt="" className="size-full object-cover opacity-80" />}
         </div>
         <div className="mx-auto -mt-12 max-w-6xl px-4 sm:-mt-16 sm:px-6">
           <div className="flex flex-col gap-5 sm:flex-row sm:items-end">
-            <Avatar name={pro.display_name} path={pro.avatar_path} size="xl" className="ring-4 ring-paper sm:size-32" />
+            <Avatar name={pro.display_name} path={pro.avatar_path} size="xl" className="ring-4 ring-black sm:size-32" />
             <div className="min-w-0 flex-1 sm:pb-2">
-              <h1 className="text-3xl font-semibold text-ink-950">{pro.display_name}</h1>
-              {pro.business_name && <p className="text-ink-600">{pro.business_name}</p>}
-              <div className="mt-2 flex flex-wrap items-center gap-x-4 gap-y-1 text-sm text-ink-600">
+              <h1 className="text-3xl font-semibold text-white">{pro.display_name}</h1>
+              {pro.business_name && <p className="text-ink-300">{pro.business_name}</p>}
+              <div className="mt-2 flex flex-wrap items-center gap-x-4 gap-y-1 text-sm text-ink-300 [&_.text-ink-500]:text-ink-400">
                 {categories.map((c) => c.name).join(' · ')}
                 {pro.city && <span className="flex items-center gap-1"><MapPin className="size-4" aria-hidden="true" />{pro.city}{pro.province ? `, ${pro.province}` : ''}</span>}
                 <Rating value={pro.rating_avg} count={pro.review_count} />
@@ -138,6 +138,7 @@ export function ProProfilePage() {
         <div className="min-w-0 space-y-10">
           {/* About */}
           <Section title="About">
+            <div className="card rounded-2xl p-5 sm:p-6">
             {pro.headline && <p className="text-lg text-ink-800">{pro.headline}</p>}
             {pro.bio ? <p className="mt-3 whitespace-pre-line text-ink-700">{pro.bio}</p> : !pro.headline && <p className="text-ink-500">No introduction yet.</p>}
             <dl className="mt-6 grid gap-4 text-sm sm:grid-cols-2">
@@ -146,14 +147,15 @@ export function ProProfilePage() {
               {pro.certifications && <Fact icon={BadgeCheck} label="Certifications (self-reported)" value={pro.certifications} />}
               {pro.licenses && <Fact icon={BadgeCheck} label="Licenses (self-reported)" value={pro.licenses} />}
             </dl>
+            </div>
           </Section>
 
           {/* Services */}
           <Section title="Services" id="services">
             {services.length === 0 ? (
-              <p className="text-ink-500">No services listed yet. You can still request a quote.</p>
+              <p className="text-ink-400">No services listed yet. You can still request a quote.</p>
             ) : (
-              <ul className="divide-y divide-ink-100 overflow-hidden rounded-xl border border-ink-200/70 bg-white">
+              <ul className="divide-y divide-ink-100 overflow-hidden rounded-2xl bg-white shadow-card">
                 {services.map((s) => (
                   <li key={s.id} className="flex flex-col gap-3 p-5 sm:flex-row sm:items-center">
                     <div className="min-w-0 flex-1">
@@ -182,7 +184,7 @@ export function ProProfilePage() {
             <Section title="Portfolio">
               <div className="grid grid-cols-2 gap-3 sm:grid-cols-3">
                 {portfolio.map((p) => (
-                  <button key={p.id} type="button" onClick={() => setLightbox(p)} className="group overflow-hidden rounded-xl border border-ink-200/70 bg-white text-left">
+                  <button key={p.id} type="button" onClick={() => setLightbox(p)} className="group overflow-hidden rounded-2xl bg-white text-left shadow-card">
                     <img src={publicUrl(p.images[0]) ?? ''} alt={p.title} loading="lazy" className="aspect-[4/3] w-full object-cover transition-transform group-hover:scale-[1.02]" />
                     <span className="block p-3">
                       <span className="block truncate text-sm font-medium text-ink-900">{p.title}</span>
@@ -200,7 +202,7 @@ export function ProProfilePage() {
               <>
                 <ul className="space-y-4">
                   {reviews.data.rows.map((r) => (
-                    <li key={r.id} className="rounded-xl border border-ink-200/70 bg-white p-5">
+                    <li key={r.id} className="rounded-2xl bg-white p-5 shadow-card">
                       <div className="flex flex-wrap items-center justify-between gap-2">
                         <Stars value={r.rating} />
                         <span className="text-xs text-ink-500">{formatDate(r.created_at)}</span>
@@ -215,14 +217,14 @@ export function ProProfilePage() {
                 <Pagination page={reviewPage} pageSize={5} total={reviews.data.total} onChange={setReviewPage} />
               </>
             ) : (
-              <p className="text-ink-500">{reviews.isPending ? 'Loading reviews…' : 'No reviews yet. Reviews can only be left after a completed booking.'}</p>
+              <p className="text-ink-400">{reviews.isPending ? 'Loading reviews…' : 'No reviews yet. Reviews can only be left after a completed booking.'}</p>
             )}
           </Section>
 
           {/* FAQs */}
           {faqs.length > 0 && (
             <Section title="Frequently asked questions">
-              <div className="divide-y divide-ink-100 rounded-xl border border-ink-200/70 bg-white">
+              <div className="divide-y divide-ink-100 rounded-2xl bg-white shadow-card">
                 {faqs.map((f, i) => (
                   <details key={i} className="group p-5">
                     <summary className="cursor-pointer list-none font-medium text-ink-900 marker:hidden">{f.question}</summary>
@@ -236,7 +238,7 @@ export function ProProfilePage() {
 
         {/* Sidebar */}
         <aside className="space-y-4 lg:sticky lg:top-24 lg:self-start">
-          <div className="rounded-xl border border-ink-200/70 bg-white p-5">
+          <div className="rounded-2xl bg-white p-5 shadow-card">
             <h2 className="font-display font-semibold text-ink-950">Verification</h2>
             {pro.verified_kinds.length ? (
               <ul className="mt-3 space-y-2 text-sm">
@@ -250,7 +252,7 @@ export function ProProfilePage() {
             <p className="mt-3 text-xs text-ink-500">Identity verification confirms who the professional is. It does not certify their workmanship.</p>
           </div>
 
-          <div className="rounded-xl border border-ink-200/70 bg-white p-5">
+          <div className="rounded-2xl bg-white p-5 shadow-card">
             <h2 className="flex items-center gap-2 font-display font-semibold text-ink-950"><Clock className="size-4" aria-hidden="true" /> Working hours</h2>
             {rules.length ? (
               <dl className="mt-3 space-y-1.5 text-sm">
@@ -269,7 +271,7 @@ export function ProProfilePage() {
           </div>
 
           {(areas.length > 0 || pro.city) && (
-            <div className="rounded-xl border border-ink-200/70 bg-white p-5">
+            <div className="rounded-2xl bg-white p-5 shadow-card">
               <h2 className="flex items-center gap-2 font-display font-semibold text-ink-950"><MapPin className="size-4" aria-hidden="true" /> Service areas</h2>
               <div className="mt-3 flex flex-wrap gap-1.5">
                 {pro.city && <span className="rounded-full bg-ink-100 px-2.5 py-1 text-xs text-ink-800">{pro.city}</span>}
@@ -278,7 +280,7 @@ export function ProProfilePage() {
             </div>
           )}
 
-          <div className="rounded-xl bg-ink-950 p-5 text-white">
+          <div className="glass rounded-2xl p-5 text-white">
             <h2 className="font-display font-semibold">Work with {pro.display_name.split(' ')[0]}</h2>
             <p className="mt-1 text-sm text-ink-300">Describe your project and get a quotation. Messages stay on Hire Me!.</p>
             {!isOwner && <ButtonLink to={`/pro/${pro.slug}/request`} variant="inverse" className="mt-4 w-full">Request a Quote</ButtonLink>}
@@ -307,7 +309,7 @@ export function ProProfilePage() {
 function Section({ title, id, children }: { title: string; id?: string; children: React.ReactNode }) {
   return (
     <section id={id} className="scroll-mt-24">
-      <h2 className="mb-4 text-xl font-semibold text-ink-950">{title}</h2>
+      <h2 className="mb-4 text-xl font-semibold text-white">{title}</h2>
       {children}
     </section>
   );

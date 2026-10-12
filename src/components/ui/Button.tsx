@@ -6,11 +6,13 @@ export type ButtonVariant = 'primary' | 'secondary' | 'ghost' | 'danger' | 'inve
 export type ButtonSize = 'sm' | 'md' | 'lg' | 'icon';
 
 const variants: Record<ButtonVariant, string> = {
-  primary: 'bg-ink-950 text-white hover:bg-ink-800 active:bg-ink-700',
-  secondary: 'border border-ink-200 bg-white text-ink-900 hover:border-ink-300 hover:bg-ink-50',
-  ghost: 'text-ink-700 hover:bg-ink-100 hover:text-ink-900',
-  danger: 'bg-danger-600 text-white hover:bg-danger-600/90',
-  inverse: 'bg-white text-ink-950 hover:bg-ink-100',
+  // White on black/glass, black inside white surfaces (see .btn-primary in index.css).
+  primary: 'btn-primary',
+  // Glass buttons: bg-white surfaces render as liquid glass (see index.css).
+  secondary: 'bg-white text-ink-900 hover:brightness-125',
+  ghost: 'text-ink-300 hover:bg-white/10 hover:text-white',
+  danger: 'bg-[#e5484d] text-white hover:bg-[#d63c41]',
+  inverse: 'bg-white text-ink-950 hover:brightness-125',
   'outline-inverse': 'border border-white/20 text-white hover:bg-white/10',
 };
 

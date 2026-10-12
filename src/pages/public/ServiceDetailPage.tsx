@@ -31,14 +31,14 @@ export function ServiceDetailPage() {
     <div className="mx-auto max-w-6xl px-4 py-10 sm:px-6">
       <Seo title={`${service.name} by ${pro.display_name}`} description={service.description?.slice(0, 155) ?? `${service.name} — ${priceLabel(service)}`}
         path={`/pro/${pro.slug}/services/${service.slug}`} image={publicUrl(service.images[0])} noindex={pro.status !== 'published'} />
-      <Link to={`/pro/${pro.slug}`} className="inline-flex items-center gap-1 text-sm text-ink-600 hover:text-ink-950">
+      <Link to={`/pro/${pro.slug}`} className="inline-flex items-center gap-1 text-sm text-ink-300 hover:text-white">
         <ChevronLeft className="size-4" aria-hidden="true" /> {pro.display_name}
       </Link>
 
       <div className="mt-6 grid gap-8 lg:grid-cols-[1fr_340px]">
         <div className="min-w-0">
-          <p className="text-sm text-ink-500">{service.category?.name}</p>
-          <h1 className="mt-1 text-3xl font-semibold text-ink-950">{service.name}</h1>
+          <p className="text-sm text-ink-400">{service.category?.name}</p>
+          <h1 className="mt-1 text-3xl font-semibold text-white">{service.name}</h1>
           {service.images.length > 0 && (
             <div className="mt-6 grid gap-3 sm:grid-cols-2">
               {service.images.map((p, i) => (
@@ -46,7 +46,7 @@ export function ServiceDetailPage() {
               ))}
             </div>
           )}
-          {service.description && <p className="mt-6 whitespace-pre-line text-ink-700">{service.description}</p>}
+          {service.description && <p className="mt-6 whitespace-pre-line text-ink-200">{service.description}</p>}
 
           <div className="mt-8 grid gap-4 sm:grid-cols-2">
             {service.materials_included && <InfoBlock icon={Check} title="Materials included">{service.materials_included}</InfoBlock>}
@@ -57,7 +57,7 @@ export function ServiceDetailPage() {
         </div>
 
         <aside className="space-y-4 lg:sticky lg:top-24 lg:self-start">
-          <div className="rounded-xl border border-ink-200/70 bg-white p-5">
+          <div className="rounded-2xl bg-white p-5 shadow-card">
             <p className="text-[13px] text-ink-500">{PRICING_LABELS[service.pricing_model]}</p>
             <p className="mt-1 font-display text-2xl font-semibold tabular-nums text-ink-950">{priceLabel(service)}</p>
             <ul className="mt-4 space-y-2 text-sm text-ink-700">
@@ -78,7 +78,7 @@ export function ServiceDetailPage() {
               </div>
             )}
           </div>
-          <Link to={`/pro/${pro.slug}`} className="flex items-center gap-3 rounded-xl border border-ink-200/70 bg-white p-4 hover:border-ink-300">
+          <Link to={`/pro/${pro.slug}`} className="flex items-center gap-3 rounded-2xl bg-white p-4 shadow-card">
             <Avatar name={pro.display_name} path={pro.avatar_path} />
             <span className="min-w-0">
               <span className="block truncate font-medium text-ink-950">{pro.display_name}</span>
@@ -94,7 +94,7 @@ export function ServiceDetailPage() {
 
 function InfoBlock({ icon: Icon, title, children }: { icon: typeof Check; title: string; children: React.ReactNode }) {
   return (
-    <div className="rounded-xl border border-ink-200/70 bg-white p-4">
+    <div className="rounded-2xl bg-white p-4 shadow-card">
       <h2 className="flex items-center gap-2 text-sm font-semibold text-ink-950"><Icon className="size-4" aria-hidden="true" /> {title}</h2>
       <p className="mt-2 whitespace-pre-line text-sm text-ink-600">{children}</p>
     </div>

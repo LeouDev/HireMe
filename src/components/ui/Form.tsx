@@ -1,4 +1,4 @@
-import { useId, type InputHTMLAttributes, type ReactNode, type SelectHTMLAttributes, type TextareaHTMLAttributes, type Ref } from 'react';
+import { useId, useState, type InputHTMLAttributes, type ReactNode, type SelectHTMLAttributes, type TextareaHTMLAttributes, type Ref } from 'react';
 import type { FieldError } from 'react-hook-form';
 
 interface FieldProps {
@@ -33,6 +33,22 @@ export function Field({ label, hint, error, required, children, className = '' }
 
 export function Input({ className = '', ref, ...props }: InputHTMLAttributes<HTMLInputElement> & { ref?: Ref<HTMLInputElement> }) {
   return <input ref={ref} className={`input ${className}`} {...props} />;
+}
+
+/** Date input whose empty state ("mm/dd/yyyy") is dimmed like other placeholders. Works controlled, uncontrolled and with react-hook-form. */
+export function DateInput({ className = '', onChange, ref, ...props }: Omit<InputHTMLAttributes<HTMLInputElement>, 'type'> & { ref?: Ref<HTMLInputElement> }) {
+  const [empty, setEmpty] = useState(!(props.value ?? props.defaultValue));
+  const isEmpty = props.value !== undefined ? !props.value : empty;
+  const setRef = (el: HTMLInputElement | null) => {
+    if (typeof ref === 'function') ref(el);
+    else if (ref) ref.current = el;
+    // react-hook-form fills the value through its ref, so read it after forwarding.
+    if (el) setEmpty(!el.value);
+  };
+  return (
+    <Input ref={setRef} type="date" className={`${isEmpty ? 'text-ink-400' : ''} ${className}`}
+      onChange={(e) => { setEmpty(!e.target.value); onChange?.(e); }} {...props} />
+  );
 }
 
 export function Textarea({ className = '', ref, rows = 4, ...props }: TextareaHTMLAttributes<HTMLTextAreaElement> & { ref?: Ref<HTMLTextAreaElement> }) {

@@ -6,7 +6,7 @@ import type { SearchResult } from '@/lib/supabase';
 
 export function ProCard({ pro }: { pro: SearchResult }) {
   return (
-    <Link to={`/pro/${pro.slug}`} className="group flex flex-col rounded-xl border border-ink-200/70 bg-white p-5 shadow-card transition-all hover:-translate-y-0.5 hover:border-ink-300 hover:shadow-pop">
+    <Link to={`/pro/${pro.slug}`} className="group flex flex-col rounded-2xl bg-white p-5 shadow-card transition-all hover:-translate-y-0.5 hover:shadow-pop">
       <div className="flex items-start gap-3">
         <Avatar name={pro.display_name} path={pro.avatar_path} size="lg" />
         <div className="min-w-0 flex-1">
@@ -39,7 +39,7 @@ export function ProCard({ pro }: { pro: SearchResult }) {
           )}
         </div>
       </div>
-      <span className="mt-4 rounded-md border border-ink-200 py-2 text-center text-sm font-medium text-ink-900 transition-colors group-hover:bg-ink-950 group-hover:text-white">
+      <span className="mt-4 rounded-md border border-ink-200 py-2 text-center text-sm font-medium text-ink-900 transition-colors group-hover:bg-[#fff] group-hover:text-[#0e1218]">
         View profile
       </span>
     </Link>
@@ -48,7 +48,7 @@ export function ProCard({ pro }: { pro: SearchResult }) {
 
 export function ProCardSkeleton() {
   return (
-    <div className="rounded-xl border border-ink-200/70 bg-white p-5">
+    <div className="rounded-2xl bg-white p-5">
       <div className="flex gap-3">
         <Skeleton className="size-14 rounded-full" />
         <div className="flex-1 space-y-2"><Skeleton className="h-4 w-2/3" /><Skeleton className="h-3 w-1/2" /></div>

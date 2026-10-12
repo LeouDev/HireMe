@@ -21,7 +21,7 @@ export function RouteError() {
   // Lazy chunks can go missing after a new deployment; a reload fetches the current build.
   const chunkFailed = error instanceof Error && /dynamically imported module|Importing a module script failed/i.test(error.message);
   return (
-    <div className="flex min-h-dvh items-center justify-center bg-paper px-4">
+    <div className="flex min-h-dvh items-center justify-center px-4">
       <div className="card w-full max-w-md">
         <EmptyState title={chunkFailed ? 'A new version is available' : 'Something went wrong'}
           description={chunkFailed ? 'Reload the page to continue.' : 'An unexpected error occurred. Try again, and contact support if it keeps happening.'}

@@ -40,15 +40,15 @@ export function DashboardShell({ area, nav, mobileItems = 4, aside }: ShellProps
 
   const railLink = ({ isActive }: { isActive: boolean }) =>
     `group relative grid size-11 place-items-center rounded-xl transition-colors ${
-      isActive ? 'bg-white text-ink-950' : 'text-ink-400 hover:bg-white/8 hover:text-white'
+      isActive ? 'bg-[#fff] text-[#0e1218] shadow-[0_6px_20px_-6px_rgb(255_255_255/0.4)]' : 'text-ink-300 hover:bg-white/10 hover:text-white'
     }`;
 
   return (
-    <div className="dark-surface min-h-dvh bg-ink-950 text-ink-100">
+    <div className="min-h-dvh text-ink-100">
       <Seo title={area === 'admin' ? 'Admin' : 'Dashboard'} noindex />
       <div className="mx-auto flex max-w-[1680px] gap-3 p-0 sm:p-3 lg:gap-4 lg:p-4">
         {/* Icon rail */}
-        <nav aria-label="Dashboard" className="sticky top-4 hidden h-[calc(100dvh-2rem)] w-[72px] shrink-0 flex-col items-center rounded-2xl border border-white/5 bg-ink-900 py-5 lg:flex">
+        <nav aria-label="Dashboard" className="glass sticky top-4 hidden h-[calc(100dvh-2rem)] w-[72px] shrink-0 flex-col items-center rounded-[28px] py-5 lg:flex">
           <Link to="/" aria-label="Hire Me! home" className="text-2xl">
             <Logo inverse showWordmark={false} />
           </Link>
@@ -57,7 +57,7 @@ export function DashboardShell({ area, nav, mobileItems = 4, aside }: ShellProps
               <li key={item.to}>
                 <NavLink to={item.to} end={item.end} className={railLink} aria-label={item.label}>
                   <item.icon className="size-[19px]" aria-hidden="true" />
-                  <span className="pointer-events-none absolute left-full z-50 ml-3 rounded-md bg-white px-2.5 py-1 text-xs font-medium whitespace-nowrap text-ink-950 opacity-0 shadow-pop transition-opacity group-hover:opacity-100 group-focus-visible:opacity-100">
+                  <span className="pointer-events-none absolute left-full z-50 ml-3 rounded-md bg-[#fff] text-[#0e1218] px-2.5 py-1 text-xs font-medium whitespace-nowrap opacity-0 shadow-pop transition-opacity group-hover:opacity-100 group-focus-visible:opacity-100">
                     {item.label}
                   </span>
                 </NavLink>
@@ -68,22 +68,22 @@ export function DashboardShell({ area, nav, mobileItems = 4, aside }: ShellProps
             {isAdmin && area !== 'admin' && (
               <NavLink to="/admin" className={railLink} aria-label="Admin">
                 <Shield className="size-[19px]" aria-hidden="true" />
-                <span className="pointer-events-none absolute left-full ml-3 rounded-md bg-white px-2.5 py-1 text-xs font-medium whitespace-nowrap text-ink-950 opacity-0 shadow-pop group-hover:opacity-100">Admin</span>
+                <span className="pointer-events-none absolute left-full ml-3 rounded-md bg-[#fff] text-[#0e1218] px-2.5 py-1 text-xs font-medium whitespace-nowrap opacity-0 shadow-pop group-hover:opacity-100">Admin</span>
               </NavLink>
             )}
             <NavLink to={switchTo.to} className={railLink} aria-label={switchTo.label}>
               <Repeat className="size-[19px]" aria-hidden="true" />
-              <span className="pointer-events-none absolute left-full ml-3 rounded-md bg-white px-2.5 py-1 text-xs font-medium whitespace-nowrap text-ink-950 opacity-0 shadow-pop group-hover:opacity-100">{switchTo.label}</span>
+              <span className="pointer-events-none absolute left-full ml-3 rounded-md bg-[#fff] text-[#0e1218] px-2.5 py-1 text-xs font-medium whitespace-nowrap opacity-0 shadow-pop group-hover:opacity-100">{switchTo.label}</span>
             </NavLink>
             <button type="button" onClick={signOut} className={railLink({ isActive: false })} aria-label="Sign out">
               <LogOut className="size-[19px]" aria-hidden="true" />
-              <span className="pointer-events-none absolute left-full ml-3 rounded-md bg-white px-2.5 py-1 text-xs font-medium whitespace-nowrap text-ink-950 opacity-0 shadow-pop group-hover:opacity-100">Sign out</span>
+              <span className="pointer-events-none absolute left-full ml-3 rounded-md bg-[#fff] text-[#0e1218] px-2.5 py-1 text-xs font-medium whitespace-nowrap opacity-0 shadow-pop group-hover:opacity-100">Sign out</span>
             </button>
           </div>
         </nav>
 
         {/* Main panel */}
-        <div className="min-w-0 flex-1 bg-ink-900 sm:rounded-2xl sm:border sm:border-white/5">
+        <div className="glass min-w-0 flex-1 max-sm:rounded-none max-sm:border-x-0 max-sm:border-t-0 sm:rounded-[28px]">
           <header className="flex items-center gap-3 px-4 pt-4 sm:px-6 sm:pt-6 lg:px-8">
             <button type="button" onClick={() => setMenuOpen(true)} className="grid size-10 place-items-center rounded-full bg-white/5 lg:hidden" aria-label="Open menu">
               <Menu className="size-5" />
@@ -107,11 +107,11 @@ export function DashboardShell({ area, nav, mobileItems = 4, aside }: ShellProps
           </main>
         </div>
 
-        {aside && <aside className="sticky top-4 hidden h-[calc(100dvh-2rem)] w-[300px] shrink-0 overflow-y-auto rounded-2xl border border-white/5 bg-ink-900 p-4 xl:block">{aside}</aside>}
+        {aside && <aside className="glass sticky top-4 hidden h-[calc(100dvh-2rem)] w-[300px] shrink-0 overflow-y-auto rounded-[28px] p-4 xl:block">{aside}</aside>}
       </div>
 
       {/* Mobile bottom bar */}
-      <nav aria-label="Dashboard shortcuts" className="fixed inset-x-0 bottom-0 z-40 border-t border-white/10 bg-ink-950/95 px-2 pt-2 pb-[max(env(safe-area-inset-bottom),0.5rem)] backdrop-blur lg:hidden">
+      <nav aria-label="Dashboard shortcuts" className="glass-strong fixed inset-x-3 bottom-3 z-40 rounded-2xl px-2 pt-2 pb-[max(env(safe-area-inset-bottom),0.5rem)] lg:hidden">
         <ul className="flex justify-around">
           {nav.slice(0, mobileItems).map((item) => (
             <li key={item.to}>
@@ -132,8 +132,8 @@ export function DashboardShell({ area, nav, mobileItems = 4, aside }: ShellProps
       {/* Mobile drawer */}
       {menuOpen && (
         <div className="fixed inset-0 z-50 lg:hidden" role="dialog" aria-modal="true" aria-label="Menu">
-          <button type="button" className="absolute inset-0 bg-ink-950/70" onClick={() => setMenuOpen(false)} aria-label="Close menu" />
-          <div className="absolute inset-y-0 left-0 flex w-[min(85vw,320px)] flex-col bg-ink-900 p-4">
+          <button type="button" className="absolute inset-0 bg-black/60 backdrop-blur-sm" onClick={() => setMenuOpen(false)} aria-label="Close menu" />
+          <div className="glass-strong absolute inset-y-3 left-3 flex w-[min(85vw,320px)] flex-col rounded-[24px] p-4">
             <div className="flex items-center justify-between">
               <Logo inverse />
               <button type="button" onClick={() => setMenuOpen(false)} className="grid size-10 place-items-center rounded-full bg-white/5" aria-label="Close menu">
@@ -144,7 +144,7 @@ export function DashboardShell({ area, nav, mobileItems = 4, aside }: ShellProps
               {nav.map((item) => (
                 <li key={item.to}>
                   <NavLink to={item.to} end={item.end} onClick={() => setMenuOpen(false)}
-                    className={({ isActive }) => `flex items-center gap-3 rounded-lg px-3 py-2.5 text-sm ${isActive ? 'bg-white text-ink-950' : 'text-ink-300 hover:bg-white/5'}`}>
+                    className={({ isActive }) => `flex items-center gap-3 rounded-lg px-3 py-2.5 text-sm ${isActive ? 'bg-[#fff] text-[#0e1218]' : 'text-ink-300 hover:bg-white/5'}`}>
                     <item.icon className="size-[18px]" aria-hidden="true" /> {item.label}
                   </NavLink>
                 </li>

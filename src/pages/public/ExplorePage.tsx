@@ -1,7 +1,7 @@
 import { SlidersHorizontal, X } from 'lucide-react';
 import { useState, type FormEvent } from 'react';
 import { useParams, useSearchParams } from 'react-router';
-import { Button, Checkbox, EmptyState, ErrorState, Input, MoneyInput, Pagination, Select } from '@/components/ui';
+import { Button, Checkbox, DateInput, EmptyState, ErrorState, Input, MoneyInput, Pagination, Select } from '@/components/ui';
 import { Seo } from '@/components/Seo';
 import { useCategories, useProfessionalSearch } from '@/features/catalog/api';
 import { ProCard, ProCardSkeleton } from '@/features/catalog/ProCard';
@@ -9,6 +9,7 @@ import { todayManila } from '@/lib/format';
 import { centsToPesoInput, parsePesosToCents } from '@shared/money';
 
 const PAGE_SIZE = 12;
+const BAR_FIELD = 'h-12 rounded-[14px] border-0 ring-1 ring-white/10 ring-inset focus:ring-white/35';
 
 export function ExplorePage() {
   const { slug } = useParams();
@@ -55,20 +56,20 @@ export function ExplorePage() {
     <div className="mx-auto max-w-7xl px-4 py-10 sm:px-6">
       <Seo title={title} path={slug ? `/category/${slug}` : '/explore'}
         description={categoryName ? `Find ${categoryName.toLowerCase()} professionals near you. Compare profiles, request quotes and book.` : 'Search skilled professionals by service, city and availability.'} />
-      <h1 className="text-3xl font-semibold text-ink-950">{title}</h1>
+      <h1 className="text-3xl font-semibold text-white">{title}</h1>
 
-      <form key={`${filters.q}|${filters.city}|${filters.date}`} onSubmit={submitSearch} role="search" className="mt-6 grid gap-2 rounded-xl border border-ink-200/70 bg-white p-2 shadow-card sm:grid-cols-[1.4fr_1fr_0.8fr_auto]">
+      <form key={`${filters.q}|${filters.city}|${filters.date}`} onSubmit={submitSearch} role="search" className="mt-6 grid gap-2 rounded-[22px] bg-white p-2.5 shadow-card sm:grid-cols-[1.4fr_1fr_0.8fr_auto]">
         <label className="sr-only" htmlFor="q">Service or keyword</label>
-        <Input id="q" name="q" defaultValue={filters.q} placeholder="Service, skill or name" className="border-0 shadow-none" />
+        <Input id="q" name="q" defaultValue={filters.q} placeholder="Service, skill or name" className={BAR_FIELD} />
         <label className="sr-only" htmlFor="city">City or area</label>
-        <Input id="city" name="city" defaultValue={filters.city} placeholder="City or service area" className="border-0 shadow-none sm:border-l" />
+        <Input id="city" name="city" defaultValue={filters.city} placeholder="City or service area" className={BAR_FIELD} />
         <label className="sr-only" htmlFor="date">Preferred date</label>
-        <Input id="date" name="date" type="date" min={todayManila()} defaultValue={filters.date} className="border-0 shadow-none" />
-        <Button type="submit">Search</Button>
+        <DateInput id="date" name="date" min={todayManila()} defaultValue={filters.date} className={BAR_FIELD} />
+        <Button type="submit" className="h-12 rounded-[14px] px-6">Search</Button>
       </form>
 
       <div className="mt-8 grid gap-8 lg:grid-cols-[240px_1fr]">
-        <aside className={`${filtersOpen ? 'block' : 'hidden'} space-y-6 lg:block`} aria-label="Filters">
+        <aside className={`${filtersOpen ? 'block' : 'hidden'} card space-y-6 self-start p-4 lg:block`} aria-label="Filters">
           <div>
             <label className="label" htmlFor="category">Category</label>
             <Select id="category" value={category} disabled={!!slug} onChange={(e) => update({ category: e.target.value })}>
@@ -101,11 +102,11 @@ export function ExplorePage() {
 
         <section aria-live="polite" aria-busy={search.isFetching}>
           <div className="mb-4 flex flex-wrap items-center justify-between gap-3">
-            <p className="text-sm text-ink-600">
+            <p className="text-sm text-ink-300">
               {search.isPending ? 'Searching…' : `${search.data?.total ?? 0} professional${search.data?.total === 1 ? '' : 's'} found`}
             </p>
             <div className="flex items-center gap-2">
-              <Button variant="secondary" size="sm" className="lg:hidden" onClick={() => setFiltersOpen((o) => !o)} icon={<SlidersHorizontal className="size-4" />} aria-expanded={filtersOpen}>
+              <Button variant="outline-inverse" size="sm" className="lg:hidden" onClick={() => setFiltersOpen((o) => !o)} icon={<SlidersHorizontal className="size-4" />} aria-expanded={filtersOpen}>
                 Filters
               </Button>
               <label htmlFor="sort" className="sr-only">Sort by</label>

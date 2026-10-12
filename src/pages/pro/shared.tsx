@@ -85,7 +85,7 @@ export function ImageUploader({ label, value, onChange, max, hint, error, thumbC
               type="button"
               onClick={() => onChange(value.filter((p) => p !== path))}
               disabled={busy}
-              className="absolute top-1.5 right-1.5 grid size-7 place-items-center rounded-full bg-ink-950/80 text-white hover:bg-ink-950"
+              className="absolute top-1.5 right-1.5 grid size-7 place-items-center rounded-full bg-black/70 text-white backdrop-blur hover:bg-black"
               aria-label={`Remove ${label.toLowerCase()} ${i + 1}`}
             >
               <X className="size-4" aria-hidden="true" />

@@ -4,10 +4,7 @@ import { Images, Plus } from 'lucide-react';
 import { useId, useState } from 'react';
 import { Controller, useForm } from 'react-hook-form';
 import { z } from 'zod';
-import {
-  Button, Card, ConfirmDialog, Dialog, EmptyState, ErrorState, Field, FormError, Input, PageHeader, PageSpinner, Skeleton,
-  Textarea, useToast,
-} from '@/components/ui';
+import { Button, Card, ConfirmDialog, DateInput, Dialog, EmptyState, ErrorState, Field, FormError, Input, PageHeader, PageSpinner, Skeleton, Textarea, useToast } from '@/components/ui';
 import { useAuth } from '@/features/auth/AuthProvider';
 import { errorMessage } from '@/lib/errors';
 import { formatDate, todayManila } from '@/lib/format';
@@ -165,7 +162,7 @@ function PortfolioEditor({ proId, item, onClose, onSaved }: { proId: string; ite
         />
         <div className="grid gap-4 sm:grid-cols-2">
           <Field label="Completed on" error={errors.completed_on} hint="Optional">
-            {(p) => <Input {...p} type="date" max={todayManila()} {...register('completed_on')} />}
+            {(p) => <DateInput {...p} max={todayManila()} {...register('completed_on')} />}
           </Field>
           <Field label="Display order" error={errors.sort_order} hint="Lower numbers appear first.">
             {(p) => <Input {...p} type="number" inputMode="numeric" min={0} max={10000} {...register('sort_order')} />}

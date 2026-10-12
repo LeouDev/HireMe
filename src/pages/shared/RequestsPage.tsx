@@ -39,7 +39,7 @@ function RequestsPage({ role }: { role: Role }) {
       <div className="mb-4 flex gap-1 overflow-x-auto" role="tablist" aria-label="Filter requests">
         {Object.keys(FILTERS).map((f) => (
           <button key={f} type="button" role="tab" aria-selected={filter === f} onClick={() => setFilter(f)}
-            className={`rounded-full px-3.5 py-1.5 text-sm whitespace-nowrap ${filter === f ? 'bg-white text-ink-950' : 'text-ink-300 hover:bg-white/5'}`}>
+            className={`rounded-full px-3.5 py-1.5 text-sm whitespace-nowrap ${filter === f ? 'bg-[#fff] text-[#0e1218]' : 'text-ink-300 hover:bg-white/5'}`}>
             {f}
           </button>
         ))}

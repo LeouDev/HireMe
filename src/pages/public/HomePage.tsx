@@ -24,6 +24,8 @@ export function HomePage() {
   );
 }
 
+const FIELD = 'flex h-12 items-center gap-2.5 rounded-[14px] bg-white/[0.07] px-3.5 ring-1 ring-white/10 ring-inset transition focus-within:bg-white/[0.11] focus-within:ring-white/35';
+
 function Hero() {
   const navigate = useNavigate();
   const [q, setQ] = useState('');
@@ -40,8 +42,8 @@ function Hero() {
 
   return (
     <section className="px-3 pt-3 sm:px-4 sm:pt-4">
-      <div className="relative mx-auto max-w-[1400px] overflow-hidden rounded-2xl bg-ink-950 text-white">
-        <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_80%_20%,rgba(255,255,255,0.06),transparent_45%)]" aria-hidden="true" />
+      <div className="glass relative mx-auto max-w-[1400px] overflow-hidden rounded-[32px] text-white">
+        <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_80%_20%,rgba(255,255,255,0.08),transparent_45%)]" aria-hidden="true" />
         <div className="relative mx-auto grid max-w-7xl items-center gap-12 px-5 py-16 sm:px-10 sm:py-20 lg:grid-cols-[1.1fr_0.9fr] lg:py-24">
           <div>
             <p className="mb-5 inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/5 px-3 py-1 text-xs text-ink-300">
@@ -54,23 +56,25 @@ function Hero() {
               From plumbing and electrical work to carpentry and home repairs, discover local professionals, request quotations, and book services with confidence.
             </p>
 
-            <form onSubmit={submit} className="mt-8 grid gap-1 rounded-xl bg-white p-2 text-ink-900 shadow-pop sm:grid-cols-2" role="search" aria-label="Find professionals">
-              <label className="flex items-center gap-2 rounded-lg px-3 py-2.5 focus-within:bg-ink-50 sm:col-span-2 sm:border-b sm:border-ink-100">
+            <form onSubmit={submit} className="mt-8 grid gap-2 rounded-[22px] bg-white p-2.5 text-ink-900 shadow-pop sm:grid-cols-2" role="search" aria-label="Find professionals">
+              <label className={`${FIELD} sm:col-span-2`}>
                 <Search className="size-4 shrink-0 text-ink-400" aria-hidden="true" />
                 <span className="sr-only">Service or skill</span>
                 <input value={q} onChange={(e) => setQ(e.target.value)} placeholder="Service or skill" className="w-full bg-transparent text-[15px] outline-none placeholder:text-ink-400" />
               </label>
-              <label className="flex items-center gap-2 rounded-lg px-3 py-2 focus-within:bg-ink-50">
+              <label className={FIELD}>
                 <MapPin className="size-4 shrink-0 text-ink-400" aria-hidden="true" />
                 <span className="sr-only">Location</span>
                 <input value={city} onChange={(e) => setCity(e.target.value)} placeholder="City or area" className="w-full bg-transparent text-[15px] outline-none placeholder:text-ink-400" />
               </label>
-              <label className="flex items-center gap-2 rounded-lg px-3 py-2 focus-within:bg-ink-50 sm:border-l sm:border-ink-100">
+              <label className={`${FIELD} relative`}>
                 <CalendarDays className="size-4 shrink-0 text-ink-400" aria-hidden="true" />
                 <span className="sr-only">Preferred date</span>
-                <input type="date" value={date} min={todayManila()} onChange={(e) => setDate(e.target.value)} className="w-full bg-transparent text-[15px] text-ink-700 outline-none" />
+                {/* The native picker icon is stretched invisibly over the field, so tapping anywhere opens it. */}
+                <input type="date" value={date} min={todayManila()} onChange={(e) => setDate(e.target.value)}
+                  className={`date-field w-full bg-transparent text-[15px] outline-none ${date ? 'text-ink-900' : 'text-ink-400'}`} />
               </label>
-              <Button type="submit" size="lg" className="w-full sm:col-span-2">Find Professionals</Button>
+              <Button type="submit" size="lg" className="w-full rounded-[14px] sm:col-span-2">Find Professionals</Button>
             </form>
 
             <div className="mt-6 flex flex-wrap items-center gap-3 text-sm">
@@ -90,7 +94,7 @@ function Hero() {
 function ProfilePreview() {
   return (
     <div className="relative hidden lg:block" aria-hidden="true">
-      <div className="rounded-2xl border border-white/10 bg-ink-900 p-5 shadow-pop">
+      <div className="rounded-3xl border border-white/10 bg-black/45 p-5 shadow-pop backdrop-blur-xl">
         <div className="flex items-center gap-2 rounded-lg bg-white/5 px-3 py-2 text-xs text-ink-400">
           <Link2 className="size-3.5" /> hireme.ph/pro/<span className="text-white">your-business</span>
         </div>
@@ -103,7 +107,7 @@ function ProfilePreview() {
         </div>
         <div className="mt-5 grid grid-cols-3 gap-2">
           {['Message', 'Request a quote', 'Book'].map((label, i) => (
-            <div key={label} className={`rounded-lg py-2 text-center text-xs font-medium ${i === 1 ? 'bg-white text-ink-950' : 'bg-white/5 text-ink-300'}`}>{label}</div>
+            <div key={label} className={`rounded-lg py-2 text-center text-xs font-medium ${i === 1 ? 'bg-[#fff] text-[#0e1218]' : 'bg-white/5 text-ink-300'}`}>{label}</div>
           ))}
         </div>
         <div className="mt-5 space-y-2">
@@ -130,9 +134,9 @@ function SectionHeading({ eyebrow, title, description, action }: { eyebrow?: str
   return (
     <div className="mb-8 flex flex-wrap items-end justify-between gap-4">
       <div className="max-w-2xl">
-        {eyebrow && <p className="mb-2 text-[13px] font-medium tracking-wide text-ink-500 uppercase">{eyebrow}</p>}
-        <h2 className="text-2xl font-semibold text-ink-950 sm:text-3xl">{title}</h2>
-        {description && <p className="mt-2 text-ink-600">{description}</p>}
+        {eyebrow && <p className="mb-2 text-[13px] font-medium tracking-wide text-ink-400 uppercase">{eyebrow}</p>}
+        <h2 className="text-2xl font-semibold text-white sm:text-3xl">{title}</h2>
+        {description && <p className="mt-2 text-ink-300">{description}</p>}
       </div>
       {action}
     </div>
@@ -144,12 +148,12 @@ function Categories() {
   return (
     <section className="mx-auto max-w-7xl px-4 pt-20 sm:px-6">
       <SectionHeading eyebrow="Popular categories" title="What do you need done?"
-        action={<Link to="/categories" className="inline-flex items-center gap-1 text-sm font-medium text-ink-900 hover:underline">All categories <ArrowRight className="size-4" /></Link>} />
+        action={<Link to="/categories" className="inline-flex items-center gap-1 text-sm font-medium text-white hover:underline">All categories <ArrowRight className="size-4" /></Link>} />
       <div className="grid grid-cols-2 gap-3 sm:grid-cols-3 lg:grid-cols-5">
-        {isPending && Array.from({ length: 10 }, (_, i) => <div key={i} className="h-24 animate-pulse rounded-xl bg-ink-100" />)}
+        {isPending && Array.from({ length: 10 }, (_, i) => <div key={i} className="h-24 animate-pulse rounded-2xl bg-white/10" />)}
         {data?.slice(0, 10).map((c) => (
-          <Link key={c.id} to={`/category/${c.slug}`} className="group flex flex-col justify-between gap-6 rounded-xl border border-ink-200/70 bg-white p-4 transition-colors hover:border-ink-900">
-            <span className="grid size-10 place-items-center rounded-lg bg-ink-100 text-ink-900 transition-colors group-hover:bg-ink-950 group-hover:text-white">
+          <Link key={c.id} to={`/category/${c.slug}`} className="group flex flex-col justify-between gap-6 rounded-2xl bg-white p-4 shadow-card transition-transform hover:-translate-y-0.5">
+            <span className="grid size-10 place-items-center rounded-lg bg-ink-100 text-ink-900 transition-colors group-hover:bg-[#fff] group-hover:text-[#0e1218]">
               <CategoryIcon name={c.icon} />
             </span>
             <span className="font-medium text-ink-900">{c.name}</span>
@@ -166,7 +170,7 @@ function Featured() {
     <section className="mx-auto max-w-7xl px-4 pt-20 sm:px-6">
       <SectionHeading eyebrow="Professionals" title="Featured professionals"
         description="Published professionals on Hire Me!. Ratings come only from customers with completed bookings."
-        action={<ButtonLink to="/explore" variant="secondary">Explore all</ButtonLink>} />
+        action={<ButtonLink to="/explore" variant="outline-inverse">Explore all</ButtonLink>} />
       <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
         {isPending && Array.from({ length: 4 }, (_, i) => <ProCardSkeleton key={i} />)}
         {data?.rows.map((p) => <ProCard key={p.id} pro={p} />)}
@@ -185,7 +189,9 @@ function HowItWorks() {
   const customer = ['Find a professional.', 'Explain your project.', 'Receive a quotation.', 'Agree on the terms.', 'Book your service.'];
   const pro = ['Create your profile.', 'List your services.', 'Receive customer inquiries.', 'Send quotations and contracts.', 'Manage your bookings.'];
   return (
-    <section id="how-it-works" className="mx-auto max-w-7xl scroll-mt-24 px-4 pt-24 sm:px-6">
+    <section className="mx-auto max-w-7xl px-4 pt-24 sm:px-6">
+      {/* Anchor sits on the heading (not the padded section) so the jump lands just below the floating header. */}
+      <span id="how-it-works" className="block scroll-mt-24" aria-hidden="true" />
       <SectionHeading eyebrow="How it works" title="One place from first message to finished job" />
       <div className="grid gap-4 lg:grid-cols-2">
         <Steps title="For customers" steps={customer} cta={<ButtonLink to="/explore">Find professionals</ButtonLink>} />
@@ -197,12 +203,12 @@ function HowItWorks() {
 
 function Steps({ title, steps, cta, dark }: { title: string; steps: string[]; cta: ReactNode; dark?: boolean }) {
   return (
-    <div className={`rounded-2xl p-6 sm:p-8 ${dark ? 'bg-ink-950 text-white' : 'border border-ink-200/70 bg-white'}`}>
+    <div className={`rounded-[28px] p-6 sm:p-8 ${dark ? 'glass text-white' : 'bg-white text-ink-950 shadow-card'}`}>
       <h3 className="text-xl font-semibold">{title}</h3>
       <ol className="mt-6 space-y-4">
         {steps.map((s, i) => (
           <li key={s} className="flex items-center gap-4">
-            <span className={`grid size-8 shrink-0 place-items-center rounded-full text-sm font-semibold ${dark ? 'bg-white text-ink-950' : 'bg-ink-950 text-white'}`}>{i + 1}</span>
+            <span className={`grid size-8 shrink-0 place-items-center rounded-full text-sm font-semibold ${dark ? 'bg-[#fff] text-[#0e1218]' : 'bg-ink-950 text-white'}`}>{i + 1}</span>
             <span className={dark ? 'text-ink-200' : 'text-ink-700'}>{s}</span>
           </li>
         ))}
@@ -221,7 +227,7 @@ function ForProfessionals() {
   ];
   return (
     <section className="mx-auto max-w-7xl px-4 pt-24 sm:px-6">
-      <div className="grid gap-10 rounded-2xl border border-ink-200/70 bg-white p-6 sm:p-10 lg:grid-cols-[0.9fr_1.1fr]">
+      <div className="grid gap-10 rounded-[28px] bg-white p-6 shadow-card sm:p-10 lg:grid-cols-[0.9fr_1.1fr]">
         <div>
           <p className="mb-2 text-[13px] font-medium tracking-wide text-ink-500 uppercase">For professionals</p>
           <h2 className="text-2xl font-semibold text-ink-950 sm:text-3xl">Your skills deserve more than a Facebook post.</h2>
@@ -259,14 +265,14 @@ function Trust() {
       <SectionHeading eyebrow="Trust" title="How we keep things clear" description="We don't promise what we can't back up. Here is what actually happens on the platform." />
       <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
         {items.map((i) => (
-          <div key={i.title} className="rounded-xl border border-ink-200/70 bg-white p-5">
+          <div key={i.title} className="rounded-2xl bg-white p-5 shadow-card">
             <i.icon className="size-5 text-ink-900" aria-hidden="true" />
             <h3 className="mt-3 font-display font-semibold text-ink-950">{i.title}</h3>
             <p className="mt-2 text-sm text-ink-600">{i.body}</p>
           </div>
         ))}
       </div>
-      <p className="mt-4 flex items-center gap-2 text-[13px] text-ink-500">
+      <p className="mt-4 flex items-center gap-2 text-[13px] text-ink-400">
         <ShieldCheck className="size-4" aria-hidden="true" /> Professionals are independent and responsible for their own work, licenses and pricing.
       </p>
     </section>
@@ -276,13 +282,13 @@ function Trust() {
 function FinalCta() {
   return (
     <section className="mx-auto max-w-7xl px-4 pt-24 sm:px-6">
-      <div className="flex flex-col items-start justify-between gap-6 rounded-2xl bg-ink-950 p-8 text-white sm:flex-row sm:items-center sm:p-12">
+      <div className="glass flex flex-col items-start justify-between gap-6 rounded-[32px] p-8 text-white sm:flex-row sm:items-center sm:p-12">
         <div>
           <h2 className="text-2xl font-semibold sm:text-3xl">Find skilled professionals. Get a quote. Book with confidence.</h2>
           <p className="mt-2 text-ink-300">Start with a search, or set up your professional page in minutes.</p>
         </div>
         <div className="flex flex-wrap gap-3">
-          <ButtonLink to="/explore" variant="inverse" size="lg">Find Professionals</ButtonLink>
+          <ButtonLink to="/explore" size="lg">Find Professionals</ButtonLink>
           <ButtonLink to="/register" variant="outline-inverse" size="lg">Get Started</ButtonLink>
         </div>
       </div>

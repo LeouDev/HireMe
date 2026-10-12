@@ -32,7 +32,7 @@ function BookingsPage({ role }: { role: Role }) {
       <div className="mb-4 flex gap-1 overflow-x-auto" role="tablist" aria-label="Filter bookings">
         {Object.keys(TABS).map((t) => (
           <button key={t} type="button" role="tab" aria-selected={tab === t} onClick={() => setTab(t)}
-            className={`rounded-full px-3.5 py-1.5 text-sm ${tab === t ? 'bg-white text-ink-950' : 'text-ink-300 hover:bg-white/5'}`}>{t}</button>
+            className={`rounded-full px-3.5 py-1.5 text-sm ${tab === t ? 'bg-[#fff] text-[#0e1218]' : 'text-ink-300 hover:bg-white/5'}`}>{t}</button>
         ))}
       </div>
       {bookings.isPending && <div className="card space-y-3 p-5">{[0, 1, 2].map((i) => <Skeleton key={i} className="h-14" />)}</div>}

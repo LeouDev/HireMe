@@ -70,7 +70,7 @@ export function NotificationBell() {
         {unread > 0 && <span className="absolute top-2 right-2.5 size-2 rounded-full bg-white ring-2 ring-ink-900" />}
       </button>
       {open && (
-        <div className="absolute right-0 z-50 mt-2 w-[min(92vw,360px)] overflow-hidden rounded-xl bg-white text-ink-900 shadow-pop">
+        <div className="glass-dense absolute right-0 z-50 mt-2 w-[min(92vw,360px)] overflow-hidden rounded-2xl bg-white text-ink-900 shadow-pop">
           <div className="flex items-center justify-between border-b border-ink-100 px-4 py-3">
             <p className="font-display text-sm font-semibold">Notifications</p>
             {unread > 0 && (
