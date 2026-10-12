@@ -1,11 +1,14 @@
 // GET /sitemap.xml (rewritten here) — public pages only: home, categories and published professionals.
-import { appUrl } from './_lib/env.js';
-import { adminClient } from './_lib/supabaseStore.js';
+// Uses the public key: RLS returns only published, active records, so no admin access is needed.
+import { createClient } from '@supabase/supabase-js';
+import type { Database } from '../src/lib/database.types.js';
+import { appUrl, publicSupabaseEnv } from './_lib/env.js';
 
 const esc = (s: string) => s.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
 
 export async function GET(): Promise<Response> {
-  const db = adminClient();
+  const { url, anonKey } = publicSupabaseEnv();
+  const db = createClient<Database>(url, anonKey, { auth: { persistSession: false, autoRefreshToken: false } });
   const base = appUrl();
   const [cats, pros, services] = await Promise.all([
     db.from('service_categories').select('slug').eq('is_active', true),

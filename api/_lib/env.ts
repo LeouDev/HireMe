@@ -11,6 +11,14 @@ export function supabaseEnv() {
   return { url: required('SUPABASE_URL'), serviceRoleKey: required('SUPABASE_SERVICE_ROLE_KEY') };
 }
 
+/** Public (anon/publishable) credentials: enough for data RLS exposes to everyone. */
+export function publicSupabaseEnv() {
+  return {
+    url: process.env.SUPABASE_URL ?? required('VITE_SUPABASE_URL'),
+    anonKey: process.env.SUPABASE_ANON_KEY ?? required('VITE_SUPABASE_ANON_KEY'),
+  };
+}
+
 export const appUrl = () => (process.env.PUBLIC_APP_URL ?? '').replace(/\/$/, '') || 'http://localhost:5173';
 
 export function paymentConfig(): PaymentConfig & { secretKey: string | null } {
